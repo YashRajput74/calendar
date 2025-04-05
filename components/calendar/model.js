@@ -2,20 +2,25 @@
 /*Date */
 export const model={
     /*dont forget this is object no need to write let,const */
-    dateObject: new Date(),
-    timeNow(){
-        const minutes= this.dateObject.getMinutes();
+    dateObject(){
+        return new Date();
+    },/**when this key value is getting initialized then it is getting made i think we need to update it everytime we call */
+    timeNow(dateObj){
+        // let counter=0
+        const minutes= dateObj.getMinutes();
         const twoDigitMinutes=String(minutes).padStart(2,'0');
-        return `${this.dateObject.getHours()}:${twoDigitMinutes}`;
+        /* console.log(counter);
+        counter++; */
+        return `${dateObj.getHours()}:${twoDigitMinutes}`;
     },
     dateToday(){
-        return this.dateObject.getDate();
+        return this.dateObject().getDate();
     },
     monthToday(){
-        return this.dateObject.getMonth();
+        return this.dateObject().getMonth();
     },
     yearToday(){
-        return this.dateObject.getFullYear();
+        return this.dateObject().getFullYear();
     },
     monthlyDays(monthToday,yearToday){
         const possibleDays=[31,28,31,30,31,30,31,31,30,31];

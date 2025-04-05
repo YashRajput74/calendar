@@ -1,13 +1,13 @@
 /*Dumb guy in the team but is the face of the team */
-import { model } from "./model";
 export const view={
-    changeTodayDate(){
+    changeTodayDate(dateDisplay){
         const dateDiv= document.querySelector(".displayedDate");
-        dateDiv.textContent=`${model.monthDaysEnglish(model.monthToday(),model.yearToday())[0]}, ${model.dateToday()}`;
+        dateDiv.textContent=dateDisplay;
+        /*maybe i shouldnt import model in this and write todays date and time like this...maybe the controller must do this. */
     },
-    changeTime(){
+    changeTime(timeDisplay){
         const currentTimeDiv=document.querySelector(".displayedDate~div");
-        currentTimeDiv.textContent=model.timeNow();
+        currentTimeDiv.textContent=timeDisplay;
     },
     updateMonthCalendar(noOfDays,arr,dateToday,noOfWeeks){
         let counter=1;
@@ -37,9 +37,9 @@ export const view={
                         td.classList.add("nonMonth");
                         arr.shift();
                     }
-                    else if(counter==noOfDays){
+                    else if(counter==noOfDays+1){
                         counter=1;
-                        flag=1
+                        flag=1;
                         td.textContent=counter;
                         td.classList.add("nonMonth");
                         counter++;

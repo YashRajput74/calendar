@@ -11,10 +11,11 @@ export function controller(){
     console.log(model.monthDaysEnglish(model.monthToday(),model.yearToday()));
     console.log(model.monthDaysEnglish(model.monthToday()-1,model.yearToday()));
     console.log(view.dateDiv); */
-    view.changeTodayDate();
+    view.changeTodayDate(`${model.monthDaysEnglish(model.monthToday(),model.yearToday())[0]}, ${model.dateToday()}`);
     setInterval(
-        ()=>view.changeTime()
+        ()=>view.changeTime(model.timeNow(model.dateObject()))/**this function is calling the timeNow() but the content inside it is not getting changed */
     ,1000);
+    /*there is a problem with this setinterval, it is running only once...or maybe it running many times but the time he is bringing is same; */
     if(model.monthDaysEnglish(model.monthToday(),model.yearToday())[1]=="Monday" && model.monthToday()==1){
         view.updateMonthCalendar(model.monthlyDays(model.monthToday(),model.yearToday()),model.previousMonthDays(model.monthToday(),model.yearToday()),model.dateToday(),4);
     }
