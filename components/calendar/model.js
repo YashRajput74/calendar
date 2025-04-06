@@ -1,16 +1,10 @@
-/*Model contains all the data so i think all the date generation must be done here. */
-/*Date */
 export const model={
-    /*dont forget this is object no need to write let,const */
     dateObject(){
         return new Date();
-    },/**when this key value is getting initialized then it is getting made i think we need to update it everytime we call */
+    },
     timeNow(dateObj){
-        // let counter=0
         const minutes= dateObj.getMinutes();
         const twoDigitMinutes=String(minutes).padStart(2,'0');
-        /* console.log(counter);
-        counter++; */
         return `${dateObj.getHours()}:${twoDigitMinutes}`;
     },
     dateToday(){
@@ -34,7 +28,6 @@ export const model={
     },
     dayAtStart(yearToday,monthToday){
         return new Date(yearToday,monthToday,1).getDay();
-        /*I still do not know why we are making a new date object every time but i know everything other than that*/
     },
     monthDaysEnglish(monthToday,yearToday){
         const months=["January","February","March","April","May","June","July","August","September","October","November","December"];

@@ -85,7 +85,7 @@ td.nonMonth{
     border-radius: 4px;
     margin-left: 15px;
 }
-.optionsDiv>div:nth-child(3){
+.jumpToday{
     align-self: center;
     border: 1px solid gray;
     padding: 3px 10px;
