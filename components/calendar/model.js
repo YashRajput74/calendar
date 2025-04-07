@@ -26,17 +26,17 @@ export const model={
         }
         return possibleDays[monthProvided];
     },
-    dayAtStart(yearProvided,monthProvided){
+    dayAtStart(monthProvided,yearProvided){
         return new Date(yearProvided,monthProvided,1).getDay();
     },
     monthDaysEnglish(monthProvided,yearProvided){
         const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
         const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-        const dayToday=this.dayAtStart(yearProvided,monthProvided);
+        const dayToday=this.dayAtStart(monthProvided,yearProvided);
         return [months[monthProvided],days[dayToday]];
     },
     previousMonthDays(monthProvided,yearProvided){
-        const startingDay=this.dayAtStart(yearProvided,monthProvided);
+        const startingDay=this.dayAtStart(monthProvided,yearProvided);
         let previousDays;
         if(monthProvided==0){
             previousDays=this.monthlyDays(11,yearProvided-1);

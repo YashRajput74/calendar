@@ -15,5 +15,10 @@ export const controller={
             }
             /* maybe i should see if the event targeted is select if yes then check the parent's .optiondiv and check both the select's value and change the value of controller..*/
         })
+        document.querySelector(".optionsDiv").addEventListener("click",(event)=>{
+            if(event.target.classList.contains("jumpToday")){
+                calendarController.todayDateRender();
+            }
+        })
     }
 }

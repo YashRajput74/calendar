@@ -3,15 +3,19 @@ import { view } from "./view";
 
 export const controller={
     init(){
-        view.changeTodayDate(`${model.monthDaysEnglish(model.monthToday(),model.yearToday())[0]}, ${model.dateToday()}`),
+        this.changeDate(model.dateToday(),model.monthToday(),model.yearToday()),
         setInterval(
             ()=>view.changeTime(model.timeNow(model.dateObject()))
         ,1000)
+    },
+    changeDate(dateProvided,monthProvided,yearProvided){
+        view.changeTodayDate(`${model.monthDaysEnglish(monthProvided,yearProvided)[0]} ${dateProvided}, ${yearProvided}`)
     },
     todayDateRender(){
         this.dateRender(model.dateToday(),model.monthToday(),model.yearToday());
     },
     dateRender(dateProvided,monthProvided,yearProvided){
+        this.changeDate(dateProvided,monthProvided,yearProvided),
         view.updateMonthCalendar(
             model.monthlyDays(monthProvided,yearProvided),
             model.previousMonthDays(monthProvided,yearProvided),
