@@ -16,34 +16,40 @@ export const model={
     yearToday(){
         return this.dateObject().getFullYear();
     },
-    monthlyDays(monthToday,yearToday){
-        const possibleDays=[31,28,31,30,31,30,31,31,30,31];
+    monthlyDays(monthProvided,yearProvided){
+        const possibleDays=[31,28,31,30,31,30,31,31,30,31,30,31];
         function leapYear(year){
             return (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
         }
-        if(monthToday==1 && leapYear(yearToday)){
+        if(monthProvided==1 && leapYear(yearProvided)){
             return 29;
         }
-        return possibleDays[monthToday];
+        return possibleDays[monthProvided];
     },
-    dayAtStart(yearToday,monthToday){
-        return new Date(yearToday,monthToday,1).getDay();
+    dayAtStart(yearProvided,monthProvided){
+        return new Date(yearProvided,monthProvided,1).getDay();
     },
-    monthDaysEnglish(monthToday,yearToday){
+    monthDaysEnglish(monthProvided,yearProvided){
         const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
         const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-        const dayToday=this.dayAtStart(yearToday,monthToday);
-        return [months[monthToday],days[dayToday]];
+        const dayToday=this.dayAtStart(yearProvided,monthProvided);
+        return [months[monthProvided],days[dayToday]];
     },
-    previousMonthDays(monthToday,yearToday){
-        const startingDay=this.dayAtStart(yearToday,monthToday);
-        let previousDays=this.monthlyDays(monthToday-1,yearToday);
+    previousMonthDays(monthProvided,yearProvided){
+        const startingDay=this.dayAtStart(yearProvided,monthProvided);
+        let previousDays;
+        if(monthProvided==0){
+            previousDays=this.monthlyDays(11,yearProvided-1);
+        }
+        else{
+            previousDays=this.monthlyDays(monthProvided-1,yearProvided);
+        }
         const arr=[];
         if(startingDay==1){
             return arr;
         }
         else if(startingDay==0){
-            for(let i=0;i<5;i++){
+            for(let i=0;i<6;i++){
                 arr.unshift(previousDays);
                 previousDays--;
             }
@@ -55,5 +61,18 @@ export const model={
             }
         }
         return arr;
+    },
+    noOfWeeks(monthProvided,yearProvided){
+        /**no of days + array ki length dono se agar remainder bach raha hai toh 1 week extra */
+        const arr=this.previousMonthDays(monthProvided,yearProvided);
+        const days=this.monthlyDays(monthProvided,yearProvided);
+        const totalDays=arr.length+days;
+        let weeks = Math.floor(totalDays / 7);
+
+    // If there’s a remainder, we need one extra week
+    if (totalDays % 7 > 0) {
+        weeks += 1;
+    }
+        return weeks;
     }
 }
