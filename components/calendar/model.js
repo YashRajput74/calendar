@@ -63,13 +63,11 @@ export const model={
         return arr;
     },
     noOfWeeks(monthProvided,yearProvided){
-        /**no of days + array ki length dono se agar remainder bach raha hai toh 1 week extra */
         const arr=this.previousMonthDays(monthProvided,yearProvided);
         const days=this.monthlyDays(monthProvided,yearProvided);
         const totalDays=arr.length+days;
         let weeks = Math.floor(totalDays / 7);
 
-    // If there’s a remainder, we need one extra week
     if (totalDays % 7 > 0) {
         weeks += 1;
     }

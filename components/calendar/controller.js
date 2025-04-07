@@ -2,20 +2,59 @@ import { model } from "./model";
 import { view } from "./view";
 
 export const controller={
+    displayedMonth: "",
+    yearProvided: "",
     init(){
-        this.changeDate(model.dateToday(),model.monthToday(),model.yearToday()),
+        this.changeDate(model.dateToday(),model.monthToday(),model.yearToday());
         setInterval(
             ()=>view.changeTime(model.timeNow(model.dateObject()))
-        ,1000)
+        ,1000);
+        document.querySelector("table").addEventListener("click",(event)=>{
+            if(event.target.tagName=="TD"){
+                const targetedCell=event.target;
+                const table=targetedCell.closest("table");
+                table.querySelectorAll("td").forEach(element => {
+                    element.classList.remove("selected");
+                });
+                if(targetedCell.classList.contains("todayDate")){
+
+                }
+                else if(targetedCell.classList.contains("nonMonth")){
+                    if(targetedCell.classList.contains("previous")){
+                        const date=targetedCell.textContent;
+                        if(this.displayedMonth==0){
+                            this.dateRender(date,11,this.yearProvided-1);
+                        }
+                        else{
+                            this.dateRender(date,this.displayedMonth-1,this.yearProvided);
+                        }
+                    }
+                    else if(targetedCell.classList.contains("next")){
+                        const date=targetedCell.textContent;
+                        if(this.displayedMonth==11){
+                            this.dateRender(date,0,this.yearProvided+1);
+                        }
+                        else{
+                            this.dateRender(date,this.displayedMonth+1,this.yearProvided);
+                        }
+                    }
+                }
+                else{
+                    targetedCell.classList.add("selected");
+                }
+            }
+        })
     },
     changeDate(dateProvided,monthProvided,yearProvided){
-        view.changeTodayDate(`${model.monthDaysEnglish(monthProvided,yearProvided)[0]} ${dateProvided}, ${yearProvided}`)
+        view.changeTodayDate(`${model.monthDaysEnglish(monthProvided,yearProvided)[0]} ${dateProvided}, ${yearProvided}`);
     },
     todayDateRender(){
         this.dateRender(model.dateToday(),model.monthToday(),model.yearToday());
     },
     dateRender(dateProvided,monthProvided,yearProvided){
-        this.changeDate(dateProvided,monthProvided,yearProvided),
+        this.displayedMonth=monthProvided;
+        this.displayedYear=yearProvided;
+        this.changeDate(dateProvided,monthProvided,yearProvided);
         view.updateMonthCalendar(
             model.monthlyDays(monthProvided,yearProvided),
             model.previousMonthDays(monthProvided,yearProvided),
@@ -28,7 +67,5 @@ export const controller={
         else if(model.noOfWeeks(monthProvided,yearProvided)==5){
             document.querySelector(".calendar>table").style.height="250px";
         }
-        /*you see i had covered two test cases here when the month is february and month start from monday i will need four weeks otherwise 5 will be suffeicient to render 31 dates but i was wrong when i rendered the march of 2025 it needed 6 weeks because the atrting date was staring from saturday. so i will ask my model function to calculate the number of weeks required too...*/
-        /*now i have to make an object of this cuz i made a function inside function it is better to make function inside object */
     },
 }

@@ -33,6 +33,7 @@ export const view={
                     if(arr.length!=0){
                         td.textContent=arr[0];
                         td.classList.add("nonMonth");
+                        td.classList.add("previous");
                         arr.shift();
                     }
                     else if(counter==noOfDays+1){
@@ -40,6 +41,7 @@ export const view={
                         flag=1;
                         td.textContent=counter;
                         td.classList.add("nonMonth");
+                        td.classList.add("next");
                         counter++;
                     }
                     else if(flag==0){
@@ -52,6 +54,7 @@ export const view={
                     else if(flag==1){
                         td.textContent=counter;
                         td.classList.add("nonMonth");
+                        td.classList.add("next");
                         counter++;
                     }
                     tr.appendChild(td);

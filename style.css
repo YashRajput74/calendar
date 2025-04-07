@@ -17,8 +17,9 @@ header{
     padding: 0vh 5vh;
 }
 nav{
-    border: 1px solid black;
     padding: 2vh 3vh;
+    background-color: rgba(0,0,0,0.5);
+    box-shadow: 0 5px 5px rgba(0,0,0,0.3), 5px 0 5px rgba(0,0,0,0.3);
 }
 nav>a{
     padding: 0vh 4vh;
@@ -67,6 +68,11 @@ td.todayDate{
 }
 td.nonMonth{
     color: gray;
+}
+td.selected{
+    border-radius: 50%;
+    color: white;
+    background-color: rgb(213, 24, 24);
 }
 .optionsDiv{
     width: 250px;
