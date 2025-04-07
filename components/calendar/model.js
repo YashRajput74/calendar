@@ -67,10 +67,9 @@ export const model={
         const days=this.monthlyDays(monthProvided,yearProvided);
         const totalDays=arr.length+days;
         let weeks = Math.floor(totalDays / 7);
-
-    if (totalDays % 7 > 0) {
-        weeks += 1;
-    }
+        if (totalDays % 7 > 0) {
+            weeks += 1;
+        }
         return weeks;
     }
 }

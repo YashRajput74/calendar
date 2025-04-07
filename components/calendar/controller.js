@@ -3,7 +3,7 @@ import { view } from "./view";
 
 export const controller={
     displayedMonth: "",
-    yearProvided: "",
+    yearProvided: model.yearToday(),
     init(){
         this.changeDate(model.dateToday(),model.monthToday(),model.yearToday());
         setInterval(
@@ -46,6 +46,8 @@ export const controller={
         })
     },
     changeDate(dateProvided,monthProvided,yearProvided){
+        /*this is changing the year but year is not coming when we select previous months date why?
+        debugger */
         view.changeTodayDate(`${model.monthDaysEnglish(monthProvided,yearProvided)[0]} ${dateProvided}, ${yearProvided}`);
     },
     todayDateRender(){
