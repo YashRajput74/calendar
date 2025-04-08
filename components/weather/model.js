@@ -11,11 +11,13 @@ export const model={
         const url=`${apiUrl}${location}&appid=${apiKey}`;
         makeRequest('GET',url,(data) => {
             successCallback(data);
+            /**if it success then do this but what if it is not? */
+            /**if it fails we should log some error */
         })
     }
 }
 
-function makeRequest(method, apiUrl, successCallback) {
+/* function makeRequest(method, apiUrl, successCallback) {
     const xhr = new XMLHttpRequest();
     xhr.open(method, apiUrl);
     xhr.onreadystatechange = function () {
@@ -25,4 +27,13 @@ function makeRequest(method, apiUrl, successCallback) {
         }
     }
     xhr.send();
+} */
+
+function makeRequest(methodToDo,apiUrl,successCallback){
+    fetch(apiUrl, {
+        method: methodToDo,
+    })
+        .then((res) => res.json())
+        .then((data) => successCallback(data))
+        .catch((err) => console.error(err));
 }
