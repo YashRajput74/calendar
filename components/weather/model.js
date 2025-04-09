@@ -1,33 +1,25 @@
-/*we will get api data here */
-/*how to run the api?*/
-
-/*how to use these???? */
-/*(apiUrl + city + &appid=${apiKey});format of fetching(requesting) */
-
 export const model={
     requestData(location,successCallback){
         const apiKey = "b438f16eb0c75fd741e0afc7fb8a53e3";
         const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
         const url=`${apiUrl}${location}&appid=${apiKey}`;
+        const currentTime = new Date();
+        const hours = currentTime.getHours().toString().padStart(2, '0');
+        const minutes = currentTime.getMinutes().toString().padStart(2, '0');
+        const displayTime = `${hours}:${minutes}`;
         makeRequest('GET',url,(data) => {
-            successCallback(data);
+            successCallback(data,displayTime);
             /**if it success then do this but what if it is not? */
             /**if it fails we should log some error */
         })
+    },
+    getLastSearchedCity() {
+        return localStorage.getItem("lastSearchedCity");
+    },
+    setLastSearchedCity(cityName) {
+        localStorage.setItem("lastSearchedCity", cityName);
     }
 }
-
-/* function makeRequest(method, apiUrl, successCallback) {
-    const xhr = new XMLHttpRequest();
-    xhr.open(method, apiUrl);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(JSON.parse(xhr.responseText));
-            successCallback(JSON.parse(xhr.responseText));
-        }
-    }
-    xhr.send();
-} */
 
 function makeRequest(methodToDo,apiUrl,successCallback){
     fetch(apiUrl, {
