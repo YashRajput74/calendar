@@ -11,13 +11,32 @@
 <body>
     <header>
         <h1>Calendar</h1>
-       <!--  <nav>
-            <a>Home</a>
-            <a>Options</a>
-            <a>About</a>
-        </nav> -->
     </header>
     <main>
+
+        <div>
+            <div class="optionsDiv">
+                <div>Jump to Month: 
+                    <select name="" id="monthSelect">
+    
+                    </select>
+                </div>
+                <div>Jump to Year: 
+                    <select name="" id="yearSelect">
+    
+                    </select>
+                </div>
+                <button class="jumpToday">Jump to Today</button>
+            </div>
+            <div class="weatherApp">
+                <span>
+                    <label for="location">Enter Location: </label>
+                    <input name="Location" type="text" placeholder="Enter Location" id="location">
+                </span>
+                <button class="searchWeatherButton">Search</button>
+            </div>
+        </div>
+
         <div class="calendar">
             <div>
                 <div class="displayedDate"></div>
@@ -27,29 +46,26 @@
             </table>
             
         </div>
-        <div class="optionsDiv">
-            <div>Jump to Month: 
-                <select name="" id="monthSelect">
-
-                </select>
+       
+        <div class="carouselContainer">
+            <div class="carousel">
+                <div class="carousel-item gradient1">
+                    <h3>Clear Weather</h3>
+                </div>
+                <div class="carousel-item gradient2">
+                    <h3>Cloudy Weather</h3>
+                </div>
+                <div class="carousel-item gradient3">
+                    <h3>Rainy Weather</h3>
+                </div>
+                <div class="carousel-item weatherDisplay">
+                    <h3>Search location to see the weather of the location.</h1>
+                </div>
             </div>
-            <div>Jump to Year: 
-                <select name="" id="yearSelect">
+        </div>
+        
 
-                </select>
-            </div>
-            <button class="jumpToday">Jump to Today</button>
-        </div>
-        <div class="weatherApp">
-            <span>
-                <label for="location">Enter Location: </label>
-                <input name="Location" type="text" placeholder="Enter Location" id="location">
-            </span>
-            <button class="searchWeatherButton">Search</button>
-        </div>
-        <div class="weatherDisplay">
-            <h3>Search location to see the weather of the location.</h1>
-        </div>
+        
     </main>
     <script type="module" src="./main.js"></script>
 </body>

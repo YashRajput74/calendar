@@ -24,7 +24,7 @@ export const view = {
         }
         else if(status=="Rain"){
             document.querySelector(".weatherDisplay").style.background="linear-gradient(to bottom, #e0e0e0, #f5f5f5)";
-            document.querySelector(".weatherDisplay").style.color="white";
+            document.querySelector(".weatherDisplay").style.color="black";
             img=`<img src="./resources/rain.png" alt="">`;
         }
         if(status=="Clear"){
@@ -42,6 +42,8 @@ export const view = {
         else if(status=="Drizzle"){
             status="drizzly";
         }
+        startCarousel();
+
         document.querySelector(".weatherDisplay").innerHTML=`<h3>${data?.name}</h3>
             <h4>Updated on ${time}</h4>
             <div>
@@ -57,4 +59,20 @@ export const view = {
             </div>`;
             /**cant understand how line 55 works */
     }
+}
+function startCarousel() {
+    const carousel = document.querySelector(".carousel");
+    let currentIndex = 0;
+
+    function moveCarousel() {
+        currentIndex++;
+        if (currentIndex >= 4) {
+            currentIndex = 3;
+        }
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    setTimeout(() => {
+        moveCarousel();
+    }, 1000);
 }
