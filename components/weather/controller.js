@@ -13,6 +13,7 @@ export const controller={
                 const cityName=input.value;
                 model.setLastSearchedCity(cityName);
                 model.requestData(cityName,view.renderWeather);
+                view.startCarousel();
             }
         })
     }

@@ -131,6 +131,8 @@ td.selected{
     color: white;
     border-radius: 10px;
     padding: 2vh 1.5vh;
+    display: flex;
+    flex-direction: column;
 }
 .weatherDisplay>h3, 
 .weatherDisplay>h4{
@@ -190,6 +192,8 @@ td.selected{
 }
 .gradient1 {
     background: linear-gradient(to bottom, #fff176, #fff59d);
+    display: flex;
+    flex-direction: column;
 }
 .gradient2 {
     background: linear-gradient(to bottom, #4f81bd, #1e3d6f);

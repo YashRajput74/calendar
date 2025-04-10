@@ -42,7 +42,7 @@ export const view = {
         else if(status=="Drizzle"){
             status="drizzly";
         }
-        startCarousel();
+        view.startCarousel();
 
         document.querySelector(".weatherDisplay").innerHTML=`<h3>${data?.name}</h3>
             <h4>Updated on ${time}</h4>
@@ -58,21 +58,21 @@ export const view = {
                 <div>sunset: ${new Date(data?.sys?.sunset * 1000).toLocaleTimeString()}</div>
             </div>`;
             /**cant understand how line 55 works */
-    }
-}
-function startCarousel() {
+    },
+    startCarousel:()=> {
     const carousel = document.querySelector(".carousel");
+    const carouselItems = document.querySelectorAll(".carousel-item");
+    const itemWidth = carouselItems[0].offsetWidth;
     let currentIndex = 0;
+    const totalItems = carouselItems.length; 
 
     function moveCarousel() {
         currentIndex++;
-        if (currentIndex >= 4) {
-            currentIndex = 3;
+        if (currentIndex >= totalItems) {  
+            currentIndex = 3;  
         }
-        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        carousel.style.transform = `translateX(-${currentIndex * itemWidth}px)`;  
     }
-
-    setTimeout(() => {
-        moveCarousel();
-    }, 1000);
+    setInterval(moveCarousel, 1000); 
+}
 }
