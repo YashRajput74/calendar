@@ -44,7 +44,12 @@ export const view = {
         }
         view.startCarousel();
 
-        document.querySelector(".weatherDisplay").innerHTML=`<h3>${data?.name}</h3>
+        document.querySelector(".weatherDisplay").innerHTML=`
+            <span>
+                <input name="Location" type="text" placeholder="Enter Location" id="location">
+                <button class="searchWeatherButton">Search</button>
+            </span>
+            <h3>${data?.name}</h3>
             <h4>Updated on ${time}</h4>
             <div>
                 ${img}
@@ -59,20 +64,32 @@ export const view = {
             </div>`;
             /**cant understand how line 55 works */
     },
-    startCarousel:()=> {
-    const carousel = document.querySelector(".carousel");
-    const carouselItems = document.querySelectorAll(".carousel-item");
-    const itemWidth = carouselItems[0].offsetWidth;
-    let currentIndex = 0;
-    const totalItems = carouselItems.length; 
-
-    function moveCarousel() {
-        currentIndex++;
-        if (currentIndex >= totalItems) {  
-            currentIndex = 3;  
-        }
-        carousel.style.transform = `translateX(-${currentIndex * itemWidth}px)`;  
-    }
-    setInterval(moveCarousel, 1000); 
-}
+    startCarousel: (() => {
+        let intervalId = null;
+    
+        return function () {
+            const carousel = document.querySelector(".carousel");
+            const carouselItems = document.querySelectorAll(".carousel-item");
+            const itemWidth = carouselItems[0].offsetWidth;
+            let currentIndex = 0;
+            const totalItems = carouselItems.length;
+    
+            if (intervalId !== null) {
+                clearInterval(intervalId);
+            }
+    
+            carousel.style.transform = `translateX(0px)`;
+    
+            function moveCarousel() {
+                currentIndex++;
+                if (currentIndex >= totalItems) {
+                    currentIndex = 3;
+                    clearInterval(intervalId);
+                }
+                carousel.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+            }
+    
+            intervalId = setInterval(moveCarousel, 1000);
+        };
+    })()    
 }
